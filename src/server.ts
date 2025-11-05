@@ -22,6 +22,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+// ✅ Add this line (important for Render / proxies)
+app.set("trust proxy", true);
+
 // Security middleware
 app.use(helmet());
 app.use(
@@ -35,7 +38,6 @@ app.use(
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
-//logger console
 // Request logging
 app.use(
   pinoHttp({
